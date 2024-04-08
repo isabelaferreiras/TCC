@@ -1,17 +1,18 @@
-package com.isabela.TCC.domain;
+package com.isabela.TCC.model;
 
 import lombok.Data;
 
 import java.util.Objects;
 
 @Data
-public class HabilidadeTecnica {
+public class HabilidadePessoal {
+
     private String habilidade;
 
-    public HabilidadeTecnica() {
+    public HabilidadePessoal() {
     }
 
-    public HabilidadeTecnica(String habilidade) {
+    public HabilidadePessoal(String habilidade) {
         this.habilidade = habilidade;
     }
 
@@ -19,7 +20,7 @@ public class HabilidadeTecnica {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        HabilidadeTecnica that = (HabilidadeTecnica) o;
+        HabilidadePessoal that = (HabilidadePessoal) o;
         return habilidade.equals(that.habilidade);
     }
 

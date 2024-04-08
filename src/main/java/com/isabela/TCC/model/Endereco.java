@@ -1,4 +1,4 @@
-package com.isabela.TCC.domain;
+package com.isabela.TCC.model;
 
 import lombok.Data;
 

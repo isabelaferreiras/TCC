@@ -1,12 +1,9 @@
-package com.isabela.TCC.domain;
+package com.isabela.TCC.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.sql.DataTruncation;
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.Objects;
 import java.util.Set;

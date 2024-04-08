@@ -1,8 +1,6 @@
-package com.isabela.TCC.domain;
+package com.isabela.TCC.model;
 
-import com.isabela.TCC.domain.Empresa;
 import jakarta.persistence.*;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
