@@ -1,14 +1,17 @@
 package com.isabela.TCC.domain;
 
 import com.isabela.TCC.domain.Empresa;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+import java.util.Objects;
+import java.util.Set;
+
 @Entity
+@Getter
+@Setter
 public class Vaga {
 
     @Id
@@ -19,6 +22,8 @@ public class Vaga {
     private String decricao;
     private String cargo;
     private Situacao situacao = Situacao.NAO_ATIVO;
+    @ManyToMany
+    private Set<Profissional> profissionais;
 
     public Vaga() {
     }
@@ -29,5 +34,18 @@ public class Vaga {
         this.decricao = decricao;
         this.cargo = cargo;
         this.situacao = situacao;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Vaga vaga = (Vaga) o;
+        return id.equals(vaga.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

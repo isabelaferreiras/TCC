@@ -2,12 +2,16 @@ package com.isabela.TCC.domain;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 @Entity
-@Data
+@Getter
+@Setter
 public class Empresa {
 
     @Id
@@ -22,14 +26,15 @@ public class Empresa {
     private String ramo;
     private Situacao situacao = Situacao.NAO_ATIVO;
     @OneToMany
-    private List<Vaga> vagas;
+    private Set<Vaga> vagas;
     private LocalDateTime createAt;
     private LocalDateTime updateAt;
+
 
     public Empresa() {
     }
 
-    public Empresa(String email, String senha, String nomeEmpresa, Endereco endereco, String descricao, String ramo, Situacao situacao, List<Vaga> vagas, LocalDateTime createAt, LocalDateTime updateAt) {
+    public Empresa(String email, String senha, String nomeEmpresa, Endereco endereco, String descricao, String ramo, Situacao situacao, Set<Vaga> vagas, LocalDateTime createAt, LocalDateTime updateAt) {
         this.email = email;
         this.senha = senha;
         this.nomeEmpresa = nomeEmpresa;

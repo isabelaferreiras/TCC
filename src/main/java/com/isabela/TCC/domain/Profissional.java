@@ -1,17 +1,20 @@
 package com.isabela.TCC.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.sql.DataTruncation;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.Objects;
+import java.util.Set;
 
-@Data
+
 @Entity
+@Getter
+@Setter
 public class Profissional {
 
     @Id
@@ -23,4 +26,33 @@ public class Profissional {
     private String senha;
     private Endereco endereco;
     private String imagem;
+    private Curriculo curriculo;
+    @ManyToMany
+    private Set<Vaga> vagas;
+
+    public Profissional() {
+    }
+
+    public Profissional(String nome, LocalDate dataNascimento, String email, String senha, Endereco endereco, String imagem, Curriculo curriculo) {
+        this.nome = nome;
+        this.dataNascimento = dataNascimento;
+        this.email = email;
+        this.senha = senha;
+        this.endereco = endereco;
+        this.imagem = imagem;
+        this.curriculo = curriculo;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Profissional that = (Profissional) o;
+        return id.equals(that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }

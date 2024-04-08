@@ -4,6 +4,7 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Objects;
 
 @Data
 public class ExperienciaProfissional {
@@ -26,5 +27,18 @@ public class ExperienciaProfissional {
         this.comeco = comeco;
         this.fim = fim;
         this.salario = salario;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ExperienciaProfissional that = (ExperienciaProfissional) o;
+        return cargo.equals(that.cargo) && empresa.equals(that.empresa);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(cargo, empresa);
     }
 }

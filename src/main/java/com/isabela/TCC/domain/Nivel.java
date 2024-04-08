@@ -4,8 +4,9 @@ import lombok.Data;
 import lombok.Getter;
 
 @Getter
-public enum Situacao {
-
-    ATIVO,
-    NAO_ATIVO;
+public enum Nivel {
+    BASICO,
+    MEDIO,
+    AVANCADO,
+    FLUENTE;
 }
