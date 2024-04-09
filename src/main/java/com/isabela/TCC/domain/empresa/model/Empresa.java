@@ -4,10 +4,7 @@ import com.isabela.TCC.domain.Endereco;
 import com.isabela.TCC.enums.Situacao;
 import com.isabela.TCC.domain.vaga.model.Vaga;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -27,12 +24,13 @@ public class Empresa {
     private String email;
     private String senha;
     private String nomeEmpresa;
-
+    @Embedded
     private Endereco endereco;
     private String descricao;
     private String ramo;
     private Situacao situacao = Situacao.NAO_ATIVO;
     @OneToMany(mappedBy = "empresa")
+    @Setter(AccessLevel.NONE)
     private Set<Vaga> vagas = new HashSet<>();
     private LocalDateTime createAt;
     private LocalDateTime updateAt;

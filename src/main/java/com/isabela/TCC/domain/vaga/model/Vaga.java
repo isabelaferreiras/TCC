@@ -23,6 +23,7 @@ public class Vaga {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String titulo;
+    @ManyToOne
     private Empresa empresa;
     private String decricao;
     private String cargo;

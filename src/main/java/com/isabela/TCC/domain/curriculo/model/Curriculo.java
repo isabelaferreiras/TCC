@@ -25,12 +25,13 @@ public class Curriculo {
     @OneToOne
     private Profissional profissional;
     private Escolaridade escolaridade;
+    @ElementCollection
     private Set<ExperienciaProfissional> experienciasProfissionais;
-
+    @ElementCollection
     private Set<HabilidadePessoal> habilidadesPessoais;
-
+    @ElementCollection
     private Set<HabilidadeTecnica> habilidadesTecnicas;
-
+    @ElementCollection
     private Set<Idioma> idiomas;
 
 
