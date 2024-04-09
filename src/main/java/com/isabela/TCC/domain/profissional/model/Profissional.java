@@ -1,7 +1,12 @@
-package com.isabela.TCC.model;
+package com.isabela.TCC.domain.profissional.model;
 
+import com.isabela.TCC.domain.Endereco;
+import com.isabela.TCC.domain.curriculo.model.Curriculo;
+import com.isabela.TCC.domain.vaga.model.Vaga;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
@@ -12,6 +17,8 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Profissional {
 
     @Id
@@ -23,22 +30,11 @@ public class Profissional {
     private String senha;
     private Endereco endereco;
     private String imagem;
+    @OneToOne
     private Curriculo curriculo;
     @ManyToMany
     private Set<Vaga> vagas;
 
-    public Profissional() {
-    }
-
-    public Profissional(String nome, LocalDate dataNascimento, String email, String senha, Endereco endereco, String imagem, Curriculo curriculo) {
-        this.nome = nome;
-        this.dataNascimento = dataNascimento;
-        this.email = email;
-        this.senha = senha;
-        this.endereco = endereco;
-        this.imagem = imagem;
-        this.curriculo = curriculo;
-    }
 
     @Override
     public boolean equals(Object o) {

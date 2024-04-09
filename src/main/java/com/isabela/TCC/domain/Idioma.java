@@ -1,23 +1,20 @@
-package com.isabela.TCC.model;
+package com.isabela.TCC.domain;
 
+import com.isabela.TCC.enums.Nivel;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Objects;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Idioma {
     private String idioma;
     private Nivel nivelLeitura;
     private Nivel nivelConvesacao;
 
-    public Idioma() {
-    }
-
-    public Idioma(String idioma, Nivel nivelLeitura, Nivel nivelConvesacao) {
-        this.idioma = idioma;
-        this.nivelLeitura = nivelLeitura;
-        this.nivelConvesacao = nivelConvesacao;
-    }
 
     @Override
     public boolean equals(Object o) {

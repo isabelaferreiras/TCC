@@ -1,12 +1,16 @@
-package com.isabela.TCC.model;
+package com.isabela.TCC.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Objects;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class ExperienciaProfissional {
     private String cargo;
     private String empresa;
@@ -15,19 +19,6 @@ public class ExperienciaProfissional {
     private LocalDate comeco;
     private LocalDate fim;
     private BigDecimal salario;
-
-    public ExperienciaProfissional() {
-    }
-
-    public ExperienciaProfissional(String cargo, String empresa, Endereco endereco, String descricao, LocalDate comeco, LocalDate fim, BigDecimal salario) {
-        this.cargo = cargo;
-        this.empresa = empresa;
-        this.endereco = endereco;
-        this.descricao = descricao;
-        this.comeco = comeco;
-        this.fim = fim;
-        this.salario = salario;
-    }
 
     @Override
     public boolean equals(Object o) {

@@ -1,4 +1,4 @@
-package com.isabela.TCC.model;
+package com.isabela.TCC.enums;
 
 import lombok.Getter;
 

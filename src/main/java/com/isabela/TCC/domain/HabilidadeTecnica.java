@@ -1,19 +1,16 @@
-package com.isabela.TCC.model;
+package com.isabela.TCC.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Objects;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class HabilidadeTecnica {
     private String habilidade;
-
-    public HabilidadeTecnica() {
-    }
-
-    public HabilidadeTecnica(String habilidade) {
-        this.habilidade = habilidade;
-    }
 
     @Override
     public boolean equals(Object o) {

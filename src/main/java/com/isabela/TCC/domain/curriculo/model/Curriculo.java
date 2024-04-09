@@ -1,7 +1,12 @@
-package com.isabela.TCC.model;
+package com.isabela.TCC.domain.curriculo.model;
 
+import com.isabela.TCC.domain.*;
+import com.isabela.TCC.domain.profissional.model.Profissional;
+import com.isabela.TCC.enums.Escolaridade;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Objects;
@@ -10,6 +15,8 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Curriculo {
 
     @Id
@@ -18,27 +25,14 @@ public class Curriculo {
     @OneToOne
     private Profissional profissional;
     private Escolaridade escolaridade;
-    @OneToMany
-    private Set<ExperienciaProfissional> experienciasProfissipnais;
-    @OneToMany
+    private Set<ExperienciaProfissional> experienciasProfissionais;
+
     private Set<HabilidadePessoal> habilidadesPessoais;
-    @OneToMany
+
     private Set<HabilidadeTecnica> habilidadesTecnicas;
-    @OneToMany
+
     private Set<Idioma> idiomas;
 
-
-    public Curriculo() {
-    }
-
-    public Curriculo(Profissional profissional, Escolaridade escolaridade, Set<ExperienciaProfissional> experienciasProfissipnais, Set<HabilidadePessoal> habilidadesPessoais, Set<HabilidadeTecnica> habilidadesTecnicas, Set<Idioma> idiomas) {
-        this.profissional = profissional;
-        this.escolaridade = escolaridade;
-        this.experienciasProfissipnais = experienciasProfissipnais;
-        this.habilidadesPessoais = habilidadesPessoais;
-        this.habilidadesTecnicas = habilidadesTecnicas;
-        this.idiomas = idiomas;
-    }
 
     @Override
     public boolean equals(Object o) {

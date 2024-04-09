@@ -1,8 +1,9 @@
-package com.isabela.TCC.model;
+package com.isabela.TCC.enums;
 
 import lombok.Data;
+import lombok.Getter;
 
-@Data
+@Getter
 public enum Escolaridade {
     ENSINO_FUNDAMENTAL_INCOMPLETO,
     ENSINO_FUNDAMENTAL_COMPLETO,

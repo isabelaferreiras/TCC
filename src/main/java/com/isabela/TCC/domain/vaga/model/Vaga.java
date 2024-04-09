@@ -1,7 +1,12 @@
-package com.isabela.TCC.model;
+package com.isabela.TCC.domain.vaga.model;
 
+import com.isabela.TCC.domain.profissional.model.Profissional;
+import com.isabela.TCC.enums.Situacao;
+import com.isabela.TCC.domain.empresa.model.Empresa;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Objects;
@@ -10,6 +15,8 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Vaga {
 
     @Id
@@ -20,19 +27,9 @@ public class Vaga {
     private String decricao;
     private String cargo;
     private Situacao situacao = Situacao.NAO_ATIVO;
-    @ManyToMany
+    @ManyToMany(mappedBy = "vagas")
     private Set<Profissional> profissionais;
 
-    public Vaga() {
-    }
-
-    public Vaga(String titulo, Empresa empresa, String decricao, String cargo, Situacao situacao) {
-        this.titulo = titulo;
-        this.empresa = empresa;
-        this.decricao = decricao;
-        this.cargo = cargo;
-        this.situacao = situacao;
-    }
 
     @Override
     public boolean equals(Object o) {
