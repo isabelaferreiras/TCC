@@ -15,6 +15,7 @@ import java.util.Set;
 
 
 @Entity
+@Table(name = "tb_profissional")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -28,9 +29,10 @@ public class Profissional {
     private LocalDate dataNascimento;
     private String email;
     private String senha;
+    @Embedded
     private Endereco endereco;
     private String imagem;
-    @OneToOne
+    @OneToOne(mappedBy = "profissional")
     private Curriculo curriculo;
     @ManyToMany
     private Set<Vaga> vagas;

@@ -1,19 +1,23 @@
 package com.isabela.TCC.domain.empresa.service;
 
+import com.isabela.TCC.domain.empresa.dto.VisualizarEmpresaDto;
 import com.isabela.TCC.enums.Situacao;
 import com.isabela.TCC.domain.empresa.dto.CadastrarEmpresaDTO;
 import com.isabela.TCC.domain.empresa.model.Empresa;
 import com.isabela.TCC.domain.empresa.repository.EmpresaRepository;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EmpresaService {
     @Autowired
-    private EmpresaRepository repository;
+    private EmpresaRepository empresaRepository;
 
     @Transactional
     public Empresa cadastrarEmpresa(CadastrarEmpresaDTO dto) {
@@ -28,6 +32,21 @@ public class EmpresaService {
         empresa.setCreateAt(LocalDateTime.now());
         empresa.setUpdateAt(LocalDateTime.now());
 
-        return repository.save(empresa);
+        return empresaRepository.save(empresa);
     }
+
+    @Transactional
+    public VisualizarEmpresaDto FindEmpresaById(Long id){
+        Empresa empresa = empresaRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Empresa com o ID: " + id + " não encontrado."));
+        return VisualizarEmpresaDto.copiarDaEntidadeProDto(empresa);
+    }
+
+    @Transactional
+    public List<VisualizarEmpresaDto> listarEmpresas(){
+        List<Empresa> empresas = empresaRepository.findAll();
+        return empresas.stream().map(VisualizarEmpresaDto::copiarDaEntidadeProDto).toList();
+    }
+
+
 }

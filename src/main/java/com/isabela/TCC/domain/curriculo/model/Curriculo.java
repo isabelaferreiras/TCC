@@ -13,6 +13,7 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
+@Table(name = "tb_curriculo")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -23,6 +24,7 @@ public class Curriculo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @OneToOne
+    @JoinColumn(name = "profissional_id")
     private Profissional profissional;
     private Escolaridade escolaridade;
     @ElementCollection

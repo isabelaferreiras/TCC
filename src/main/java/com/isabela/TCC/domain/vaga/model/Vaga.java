@@ -13,6 +13,7 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
+@Table(name = "tb_vaga")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -24,6 +25,7 @@ public class Vaga {
     private Long id;
     private String titulo;
     @ManyToOne
+    @JoinColumn(name = "empresa_id")
     private Empresa empresa;
     private String decricao;
     private String cargo;
