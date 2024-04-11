@@ -1,11 +1,13 @@
 package com.isabela.TCC.controller;
 
+import com.isabela.TCC.domain.empresa.dto.AtualizarEmpresaDto;
 import com.isabela.TCC.domain.empresa.dto.CadastrarEmpresaDTO;
 import com.isabela.TCC.domain.empresa.dto.VisualizarEmpresaDto;
 import com.isabela.TCC.domain.empresa.model.Empresa;
 import com.isabela.TCC.domain.empresa.service.EmpresaService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -28,8 +30,9 @@ public class EmpresaController {
     }
 
     @GetMapping
-    public ResponseEntity<List<VisualizarEmpresaDto>> verEmpresas(){
-        List<VisualizarEmpresaDto> empresa = empresaService.listarEmpresas();
+    public ResponseEntity<Page<VisualizarEmpresaDto>> listarEmpresas(@RequestParam int pagina,
+                                                                     @RequestParam int qtde){
+        Page<VisualizarEmpresaDto> empresa = empresaService.listarEmpresas(pagina, qtde);
         return ResponseEntity.ok(empresa);
     }
 
@@ -37,5 +40,18 @@ public class EmpresaController {
     public ResponseEntity<VisualizarEmpresaDto> findEmpresaById(@PathVariable("id") Long id){
         VisualizarEmpresaDto empresa = empresaService.FindEmpresaById(id);
         return ResponseEntity.ok(empresa);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<VisualizarEmpresaDto> atualizarDadosEmpresa(@PathVariable("id") Long id,
+                                                                      @RequestBody @Valid AtualizarEmpresaDto dto){
+        VisualizarEmpresaDto empresa = empresaService.atualizarDadosEmpresa(id, dto);
+        return ResponseEntity.ok(empresa);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletarEmpresa(@PathVariable("id") Long id){
+        empresaService.deletarEmpresa(id);
+        return ResponseEntity.noContent().build();
     }
 }

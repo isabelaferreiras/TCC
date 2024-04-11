@@ -32,7 +32,7 @@ public class Profissional {
     @Embedded
     private Endereco endereco;
     private String imagem;
-    @OneToOne(mappedBy = "profissional")
+    @OneToOne(mappedBy = "profissional", cascade = CascadeType.ALL, orphanRemoval = true)
     private Curriculo curriculo;
     @ManyToMany
     private Set<Vaga> vagas;

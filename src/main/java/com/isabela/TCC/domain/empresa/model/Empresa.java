@@ -31,7 +31,7 @@ public class Empresa {
     private String ramo;
     private Situacao situacao = Situacao.NAO_ATIVO;
     private String cnpj;
-    @OneToMany(mappedBy = "empresa")
+    @OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL, orphanRemoval = true)
     @Setter(AccessLevel.NONE)
     private Set<Vaga> vagas = new HashSet<>();
     private LocalDateTime createAt;

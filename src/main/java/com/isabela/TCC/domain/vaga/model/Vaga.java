@@ -30,7 +30,7 @@ public class Vaga {
     private String decricao;
     private String cargo;
     private Situacao situacao = Situacao.NAO_ATIVO;
-    @ManyToMany(mappedBy = "vagas")
+    @ManyToMany(mappedBy = "vagas", cascade = CascadeType.ALL)
     private Set<Profissional> profissionais;
 
 
