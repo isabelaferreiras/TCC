@@ -20,7 +20,7 @@ public class EmpresaService {
     private EmpresaRepository empresaRepository;
 
     @Transactional
-    public Empresa cadastrarEmpresa(CadastrarEmpresaDTO dto) {
+    public VisualizarEmpresaDto cadastrarEmpresa(CadastrarEmpresaDTO dto) {
         Empresa empresa = new Empresa();
         empresa.setEmail(dto.getEmail());
         empresa.setSenha(dto.getSenha());
@@ -28,11 +28,14 @@ public class EmpresaService {
         empresa.setEndereco(dto.getEndereco());
         empresa.setDescricao(dto.getDescricao());
         empresa.setRamo(dto.getRamo());
+        empresa.setCnpj(dto.getCnpj());
         empresa.setSituacao(Situacao.NAO_ATIVO);
         empresa.setCreateAt(LocalDateTime.now());
         empresa.setUpdateAt(LocalDateTime.now());
 
-        return empresaRepository.save(empresa);
+        empresaRepository.save(empresa);
+
+        return VisualizarEmpresaDto.copiarDaEntidadeProDto(empresa);
     }
 
     @Transactional
@@ -45,7 +48,9 @@ public class EmpresaService {
     @Transactional
     public List<VisualizarEmpresaDto> listarEmpresas(){
         List<Empresa> empresas = empresaRepository.findAll();
-        return empresas.stream().map(VisualizarEmpresaDto::copiarDaEntidadeProDto).toList();
+        return empresas.stream()
+                .map(VisualizarEmpresaDto::copiarDaEntidadeProDto)
+                .toList();
     }
 
 

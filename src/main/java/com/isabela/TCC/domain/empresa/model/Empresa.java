@@ -30,6 +30,7 @@ public class Empresa {
     private String descricao;
     private String ramo;
     private Situacao situacao = Situacao.NAO_ATIVO;
+    private String cnpj;
     @OneToMany(mappedBy = "empresa")
     @Setter(AccessLevel.NONE)
     private Set<Vaga> vagas = new HashSet<>();
