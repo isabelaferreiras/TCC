@@ -24,7 +24,7 @@ public class ProfissionalService {
         profissional.setEmail(dto.getEmail());
         profissional.setSenha(dto.getSenha());
         profissional.setNome(dto.getNome());
-        profissional.setDataNascimento(LocalDate.parse(dto.getDataNascimento(), DateTimeFormatter.ofPattern("dd/MM/YYYY")));
+        profissional.setDataNascimento(LocalDate.parse(dto.getDataNascimento(), DateTimeFormatter.ofPattern("dd/MM/yyyy")));
         profissional.setEndereco(dto.getEndereco());
         profissional.setCreateAt(LocalDateTime.now());
         profissional.setUpdateAt(LocalDateTime.now());

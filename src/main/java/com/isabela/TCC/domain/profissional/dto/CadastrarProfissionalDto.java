@@ -6,6 +6,7 @@ import com.isabela.TCC.domain.empresa.model.Empresa;
 import com.isabela.TCC.domain.profissional.model.Profissional;
 import com.isabela.TCC.utils.Endereco;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -13,6 +14,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
+import java.time.format.DateTimeFormatter;
 import java.util.Currency;
 
 @Data
@@ -21,18 +23,13 @@ import java.util.Currency;
 public class CadastrarProfissionalDto {
 
     @Email
-    @NotNull
-    @NotEmpty
+    @NotBlank
     private String email;
-    @NotNull
-    @NotEmpty
-    @Length(min = 12)
+    @NotBlank
     private String senha;
-    @NotNull
-    @NotEmpty
+    @NotBlank
     private String nome;
-    @NotNull
-    @NotEmpty
+    @NotBlank
     private String dataNascimento;
     private Endereco endereco;
 
@@ -42,7 +39,7 @@ public class CadastrarProfissionalDto {
         dto.email = entidade.getEmail();
         dto.senha = entidade.getSenha();
         dto.endereco = entidade.getEndereco();
-        dto.dataNascimento = String.valueOf(entidade.getDataNascimento());
+        dto.dataNascimento = entidade.getDataNascimento().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 
         return dto;
     }
