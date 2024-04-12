@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
@@ -15,6 +16,7 @@ import java.util.Objects;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode
 public class AtualizarEmpresaDto {
     @NotNull
     @NotEmpty
@@ -39,16 +41,4 @@ public class AtualizarEmpresaDto {
         return dto;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        AtualizarEmpresaDto that = (AtualizarEmpresaDto) o;
-        return nomeEmpresa.equals(that.nomeEmpresa);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(nomeEmpresa);
-    }
 }

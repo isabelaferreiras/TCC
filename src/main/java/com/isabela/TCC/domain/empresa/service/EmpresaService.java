@@ -46,7 +46,7 @@ public class EmpresaService {
     @Transactional
     public VisualizarEmpresaDto FindEmpresaById(Long id){
         Empresa empresa = empresaRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Empresa com o ID: " + id + " não encontrado."));
+                .orElseThrow(() -> new EntityNotFoundException("Empresa com o ID: " + id + " não encontrada."));
         return VisualizarEmpresaDto.copiarDaEntidadeProDto(empresa);
     }
 
