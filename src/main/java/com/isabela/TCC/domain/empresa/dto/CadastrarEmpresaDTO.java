@@ -1,6 +1,6 @@
 package com.isabela.TCC.domain.empresa.dto;
 
-import com.isabela.TCC.domain.Endereco;
+import com.isabela.TCC.utils.Endereco;
 import com.isabela.TCC.domain.empresa.model.Empresa;
 import com.isabela.TCC.enums.Situacao;
 import jakarta.validation.constraints.Email;
@@ -10,7 +10,6 @@ import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.validator.constraints.Length;
 
 @Data
 @AllArgsConstructor

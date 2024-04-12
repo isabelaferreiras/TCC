@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -30,8 +31,13 @@ public class Vaga {
     private String decricao;
     private String cargo;
     private Situacao situacao = Situacao.NAO_ATIVO;
-    @ManyToMany(mappedBy = "vagas", cascade = CascadeType.ALL)
-    private Set<Profissional> profissionais;
+    @ManyToMany
+    @JoinTable(
+            name = "profissional_vaga",
+            joinColumns = @JoinColumn(name = "vaga_id"),
+            inverseJoinColumns = @JoinColumn(name = "profissional_id")
+    )
+    private Set<Profissional> profissionais = new HashSet<>();
 
 
     @Override

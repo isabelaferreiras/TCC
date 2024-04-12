@@ -1,14 +1,18 @@
 package com.isabela.TCC.domain.curriculo.model;
 
-import com.isabela.TCC.domain.*;
 import com.isabela.TCC.domain.profissional.model.Profissional;
 import com.isabela.TCC.enums.Escolaridade;
+import com.isabela.TCC.utils.ExperienciaProfissional;
+import com.isabela.TCC.utils.HabilidadePessoal;
+import com.isabela.TCC.utils.HabilidadeTecnica;
+import com.isabela.TCC.utils.Idioma;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -28,13 +32,13 @@ public class Curriculo {
     private Profissional profissional;
     private Escolaridade escolaridade;
     @ElementCollection
-    private Set<ExperienciaProfissional> experienciasProfissionais;
+    private Set<ExperienciaProfissional> experienciasProfissionais = new HashSet<>();
     @ElementCollection
-    private Set<HabilidadePessoal> habilidadesPessoais;
+    private Set<HabilidadePessoal> habilidadesPessoais = new HashSet<>();
     @ElementCollection
-    private Set<HabilidadeTecnica> habilidadesTecnicas;
+    private Set<HabilidadeTecnica> habilidadesTecnicas = new HashSet<>();
     @ElementCollection
-    private Set<Idioma> idiomas;
+    private Set<Idioma> idiomas = new HashSet<>();
 
 
     @Override

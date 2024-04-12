@@ -1,8 +1,7 @@
 package com.isabela.TCC.domain.empresa.dto;
 
-import com.isabela.TCC.domain.Endereco;
+import com.isabela.TCC.utils.Endereco;
 import com.isabela.TCC.domain.empresa.model.Empresa;
-import com.isabela.TCC.enums.Situacao;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;

@@ -1,6 +1,6 @@
 package com.isabela.TCC.domain.profissional.model;
 
-import com.isabela.TCC.domain.Endereco;
+import com.isabela.TCC.utils.Endereco;
 import com.isabela.TCC.domain.curriculo.model.Curriculo;
 import com.isabela.TCC.domain.vaga.model.Vaga;
 import jakarta.persistence.*;
@@ -10,6 +10,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -34,8 +36,10 @@ public class Profissional {
     private String imagem;
     @OneToOne(mappedBy = "profissional", cascade = CascadeType.ALL, orphanRemoval = true)
     private Curriculo curriculo;
-    @ManyToMany
-    private Set<Vaga> vagas;
+    @ManyToMany(mappedBy = "profissionais", cascade = CascadeType.ALL)
+    private Set<Vaga> vagas = new HashSet<>();
+    private LocalDateTime createAt;
+    private LocalDateTime updateAt;
 
 
     @Override

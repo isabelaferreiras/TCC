@@ -1,6 +1,6 @@
 package com.isabela.TCC.domain.empresa.model;
 
-import com.isabela.TCC.domain.Endereco;
+import com.isabela.TCC.utils.Endereco;
 import com.isabela.TCC.enums.Situacao;
 import com.isabela.TCC.domain.vaga.model.Vaga;
 import jakarta.persistence.*;

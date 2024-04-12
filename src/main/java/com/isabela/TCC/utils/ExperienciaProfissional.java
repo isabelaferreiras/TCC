@@ -1,4 +1,4 @@
-package com.isabela.TCC.domain;
+package com.isabela.TCC.utils;
 
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
