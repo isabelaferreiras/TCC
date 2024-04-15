@@ -29,6 +29,7 @@ public class VisualizarVagaDto {
         dto.descricao = entidade.getDecricao();
         dto.cargo = entidade.getCargo();
         dto.situacao = entidade.getSituacao();
+        dto.empresa = VisualizarEmpresaDto.copiarDaEntidadeProDto(entidade.getEmpresa());
 
         return dto;
     }

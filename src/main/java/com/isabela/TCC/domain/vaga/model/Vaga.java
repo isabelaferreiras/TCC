@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -38,6 +39,8 @@ public class Vaga {
             inverseJoinColumns = @JoinColumn(name = "profissional_id")
     )
     private Set<Profissional> profissionais = new HashSet<>();
+    private LocalDateTime createAt;
+    private LocalDateTime updateAt;
 
 
     @Override
