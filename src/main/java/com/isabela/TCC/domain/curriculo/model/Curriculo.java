@@ -12,6 +12,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -39,6 +40,8 @@ public class Curriculo {
     private Set<HabilidadeTecnica> habilidadesTecnicas = new HashSet<>();
     @ElementCollection
     private Set<Idioma> idiomas = new HashSet<>();
+    private LocalDateTime createAt;
+    private LocalDateTime updateAt;
 
 
     @Override
