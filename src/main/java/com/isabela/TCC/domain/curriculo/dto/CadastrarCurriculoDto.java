@@ -21,8 +21,8 @@ import java.util.Set;
 public class CadastrarCurriculoDto {
 
     private Long profissionalId;
-    private Escolaridade escolaridade;
-    private Set<ExperienciaProfissional> experienciaProfissionais = new HashSet<>();
+    private Escolaridade escolaridade = Escolaridade.ENSINO_FUNDAMENTAL_INCOMPLETO;
+    private Set<ExperienciaProfissional> experienciasProfissionais = new HashSet<>();
     private Set<HabilidadePessoal> habilidadesPessoais = new HashSet<>();
     private Set<HabilidadeTecnica> habilidadesTecnicas = new HashSet<>();
     private Set<Idioma> idiomas = new HashSet<>();

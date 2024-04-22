@@ -34,7 +34,7 @@ public class Profissional {
     @Embedded
     private Endereco endereco;
     private String imagem;
-    @OneToOne(mappedBy = "profissional", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne
     private Curriculo curriculo;
     @ManyToMany(mappedBy = "profissionais", cascade = CascadeType.ALL)
     private Set<Vaga> vagas = new HashSet<>();

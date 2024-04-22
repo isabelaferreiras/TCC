@@ -21,10 +21,5 @@ import java.util.Set;
 @EqualsAndHashCode
 public class AtualizarCurriculoDto {
 
-    private Escolaridade escolaridade;
-    private Set<ExperienciaProfissional> experienciasProfissionais = new HashSet<>();
-    private Set<HabilidadePessoal> habilidadesPessoais = new HashSet<>();
-    private Set<HabilidadeTecnica> habilidadesTecnicas = new HashSet<>();
-    private Set<Idioma> idiomas = new HashSet<>();
-    private LocalDateTime updateAt;
+    private Escolaridade escolaridade = Escolaridade.ENSINO_FUNDAMENTAL_INCOMPLETO;
 }

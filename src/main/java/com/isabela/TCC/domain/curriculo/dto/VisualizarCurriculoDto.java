@@ -26,7 +26,7 @@ public class VisualizarCurriculoDto {
 
     private Long id;
     private VisualizarProfissionalDto profissional;
-    private Escolaridade escolaridade;
+    private Escolaridade escolaridade = Escolaridade.ENSINO_FUNDAMENTAL_INCOMPLETO;
     private Set<ExperienciaProfissional> experienciaProfissionais = new HashSet<>();
     private Set<HabilidadePessoal> habilidadesPessoais = new HashSet<>();
     private Set<HabilidadeTecnica> habilidadesTecnicas = new HashSet<>();

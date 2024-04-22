@@ -28,7 +28,7 @@ public class Curriculo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToOne
+    @OneToOne(mappedBy = "curriculo", cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "profissional_id")
     private Profissional profissional;
     private Escolaridade escolaridade;
