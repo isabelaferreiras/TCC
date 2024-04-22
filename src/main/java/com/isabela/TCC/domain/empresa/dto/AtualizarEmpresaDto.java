@@ -2,8 +2,10 @@ package com.isabela.TCC.domain.empresa.dto;
 
 import com.isabela.TCC.utils.Endereco;
 import com.isabela.TCC.domain.empresa.model.Empresa;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -18,15 +20,16 @@ import java.util.Objects;
 @NoArgsConstructor
 @EqualsAndHashCode
 public class AtualizarEmpresaDto {
-    @NotNull
-    @NotEmpty
+    @NotBlank
     private String senha;
-    @NotNull
-    @NotEmpty
-    @Length(min = 3)
+    @NotNull(message = "Nome da empresa não pode ser nulo")
+    @NotEmpty(message = "Nome da empresa não pode estar vazio")
+    @Length(min = 2)
     private String nomeEmpresa;
     private Endereco endereco;
+    @Size(min = 10, max = 200)
     private String descricao;
+    @Size(min = 4, max = 20)
     private String ramo;
     private LocalDateTime updateAt;
 

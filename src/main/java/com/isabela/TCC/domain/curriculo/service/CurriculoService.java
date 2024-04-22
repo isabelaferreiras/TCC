@@ -19,6 +19,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
@@ -39,6 +40,8 @@ public class CurriculoService {
         curriculo.setHabilidadesTecnicas(dto.getHabilidadesTecnicas());
         curriculo.setIdiomas(dto.getIdiomas());
         curriculo.setProfissional(profissional);
+        curriculo.setCreateAt(LocalDateTime.now());
+        curriculo.setUpdateAt(LocalDateTime.now());
 
         curriculoRepository.save(curriculo);
         return VisualizarCurriculoDto.copiarDaEntidadeProDto(curriculo);
@@ -63,6 +66,7 @@ public class CurriculoService {
         Curriculo curriculoAtualizado = curriculoRepository.getReferenceById(id);
         try {
             curriculoAtualizado.setEscolaridade(dto.getEscolaridade());
+            curriculoAtualizado.setUpdateAt(LocalDateTime.now());
 
             curriculoRepository.save(curriculoAtualizado);
             return VisualizarCurriculoDto.copiarDaEntidadeProDto(curriculoAtualizado);

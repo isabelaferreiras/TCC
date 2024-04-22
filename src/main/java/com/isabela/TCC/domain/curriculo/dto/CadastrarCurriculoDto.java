@@ -26,5 +26,5 @@ public class CadastrarCurriculoDto {
     private Set<HabilidadePessoal> habilidadesPessoais = new HashSet<>();
     private Set<HabilidadeTecnica> habilidadesTecnicas = new HashSet<>();
     private Set<Idioma> idiomas = new HashSet<>();
-    private LocalDateTime createAt;
+
 }

@@ -4,6 +4,8 @@ import com.isabela.TCC.domain.empresa.dto.AtualizarEmpresaDto;
 import com.isabela.TCC.domain.empresa.model.Empresa;
 import com.isabela.TCC.domain.profissional.model.Profissional;
 import com.isabela.TCC.utils.Endereco;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -18,6 +20,8 @@ import java.time.LocalDateTime;
 public class AtualizarProfissionalDto {
 
     private String senha;
+    @NotNull(message = "Nome não pode ser nulo.")
+    @NotEmpty(message = "Nome não pode estar vazio.")
     private String nome;
     private Endereco endereco;
     private LocalDateTime updateAt;

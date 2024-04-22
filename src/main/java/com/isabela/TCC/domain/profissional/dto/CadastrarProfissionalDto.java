@@ -22,12 +22,14 @@ import java.util.Currency;
 @NoArgsConstructor
 public class CadastrarProfissionalDto {
 
+    @NotNull(message = "E-mail não pode ser nulo.")
+    @NotEmpty(message = "E-mail não pode estar vazio.")
     @Email
-    @NotBlank
     private String email;
     @NotBlank
     private String senha;
-    @NotBlank
+    @NotNull(message = "Nome não pode ser nulo.")
+    @NotEmpty(message = "Nome não pode estar vazio.")
     private String nome;
     @NotBlank
     private String dataNascimento;
