@@ -9,7 +9,7 @@ import java.time.Instant;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class FormatacaoErroPadrao {
+public class StandardError {
 
     private Instant timestamp;
     private Integer status;

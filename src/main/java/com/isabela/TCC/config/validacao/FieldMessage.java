@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-public class CampoDoErro {
+public class FieldMessage {
 
     private String campo;
     private String erro;
