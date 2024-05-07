@@ -14,10 +14,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import java.time.Instant;
 
 @RestControllerAdvice
-public class ErroDeValidacaoHandler {
-
-    @Autowired
-    private MessageSource messageSource;
+public class ControllerExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ValidationError> validacao(MethodArgumentNotValidException e, HttpServletRequest request){
@@ -25,7 +22,7 @@ public class ErroDeValidacaoHandler {
         ValidationError erro = new ValidationError();
         erro.setTimestamp(Instant.now());
         erro.setStatus(status.value());
-        erro.setErro("Erro de validação!");
+        erro.setErro("Validation Exception!");
         erro.setMensagem("Dados inválidos");
         erro.setPath(request.getRequestURI());
 

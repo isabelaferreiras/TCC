@@ -3,13 +3,18 @@ package com.isabela.TCC.domain.profissional.dto;
 import com.isabela.TCC.domain.empresa.dto.VisualizarEmpresaDto;
 import com.isabela.TCC.domain.empresa.model.Empresa;
 import com.isabela.TCC.domain.profissional.model.Profissional;
+import com.isabela.TCC.domain.vaga.dto.VisualizarVagaDto;
+import com.isabela.TCC.domain.vaga.model.Vaga;
 import com.isabela.TCC.utils.Endereco;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Data
 @AllArgsConstructor
@@ -21,6 +26,7 @@ public class VisualizarProfissionalDto {
     private LocalDate dataNascimento;
     private String email;
     private Endereco endereco;
+    private Set<VisualizarVagaDto> vagas = new HashSet<>();
 
     public static VisualizarProfissionalDto copiarDaEntidadeProDto (Profissional entidade){
         VisualizarProfissionalDto dto = new VisualizarProfissionalDto();
@@ -29,6 +35,7 @@ public class VisualizarProfissionalDto {
         dto.dataNascimento = entidade.getDataNascimento();
         dto.email = entidade.getEmail();
         dto.endereco = entidade.getEndereco();
+        dto.vagas = entidade.getVagas().stream().map(VisualizarVagaDto::copiarDaEntidadeProDto).collect(Collectors.toSet());
 
         return dto;
     }

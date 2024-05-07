@@ -62,4 +62,10 @@ public class ProfissionalController {
         return ResponseEntity.noContent().build();
     }
 
+    @PostMapping("/cadastroNaVaga")
+    public ResponseEntity<Void> cadastrarProfissionalNaVaga(Long profissionalId, Long vagaId){
+        profissionalService.cadastrarProfissionalNaVaga(profissionalId, vagaId);
+        return ResponseEntity.noContent().build();
+    }
+
 }
