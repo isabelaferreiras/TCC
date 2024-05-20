@@ -3,6 +3,7 @@ package com.isabela.TCC.domain.vaga.model;
 import com.isabela.TCC.domain.profissional.model.Profissional;
 import com.isabela.TCC.enums.Situacao;
 import com.isabela.TCC.domain.empresa.model.Empresa;
+import com.isabela.TCC.utils.Endereco;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -26,6 +27,8 @@ public class Vaga {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String titulo;
+    @Embedded
+    private Endereco endereco;
     @ManyToOne
     @JoinColumn(name = "empresa_id")
     private Empresa empresa;

@@ -8,6 +8,7 @@ import com.isabela.TCC.domain.profissional.dto.VisualizarProfissionalVagaDto;
 import com.isabela.TCC.domain.profissional.model.Profissional;
 import com.isabela.TCC.domain.vaga.model.Vaga;
 import com.isabela.TCC.enums.Situacao;
+import com.isabela.TCC.utils.Endereco;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -26,6 +27,7 @@ public class VisualizarVagaDto {
     private Long id;
     private String titulo;
     private VisualizarEmpresaDaVagaDto empresa;
+    private Endereco endereco;
     private String descricao;
     private String cargo;
     private Situacao situacao = Situacao.NAO_ATIVO;
@@ -36,6 +38,7 @@ public class VisualizarVagaDto {
         dto.id = entidade.getId();
         dto.titulo = entidade.getTitulo();
         dto.descricao = entidade.getDecricao();
+        dto.endereco = entidade.getEndereco();
         dto.cargo = entidade.getCargo();
         dto.situacao = entidade.getSituacao();
         dto.empresa = VisualizarEmpresaDaVagaDto.copiarDaEntidadeProDto(entidade.getEmpresa());

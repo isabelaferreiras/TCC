@@ -4,6 +4,7 @@ import com.isabela.TCC.domain.empresa.model.Empresa;
 import com.isabela.TCC.domain.empresa.repository.EmpresaRepository;
 import com.isabela.TCC.domain.vaga.dto.AtualizarVagaDto;
 import com.isabela.TCC.domain.vaga.dto.CadastrarVagaDto;
+import com.isabela.TCC.domain.vaga.dto.VisualizarVagaComFiltroDto;
 import com.isabela.TCC.domain.vaga.dto.VisualizarVagaDto;
 import com.isabela.TCC.domain.vaga.model.Vaga;
 import com.isabela.TCC.domain.vaga.repository.VagaRepository;
@@ -36,6 +37,7 @@ public class VagaService {
         vaga.setTitulo(dto.getTitulo());
         vaga.setDecricao(dto.getDescricao());
         vaga.setCargo(dto.getCargo());
+        vaga.setEndereco(dto.);
         vaga.setSituacao(Situacao.NAO_ATIVO);
         vaga.setEmpresa(empresa);
 
@@ -80,4 +82,6 @@ public class VagaService {
                 .orElseThrow(() -> new EntityNotFoundException("Vaga com o ID: " + id + " não encontrada."));
         vagaRepository.delete(vaga);
     }
+
+    public Page<VisualizarVagaComFiltroDto> exibirVagasComFiltro(String titulo, String cargo)
 }
