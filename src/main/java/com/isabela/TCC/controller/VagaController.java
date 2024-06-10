@@ -2,11 +2,14 @@ package com.isabela.TCC.controller;
 
 import com.isabela.TCC.domain.vaga.dto.AtualizarVagaDto;
 import com.isabela.TCC.domain.vaga.dto.CadastrarVagaDto;
+import com.isabela.TCC.domain.vaga.dto.VisualizarVagaComFiltroDto;
 import com.isabela.TCC.domain.vaga.dto.VisualizarVagaDto;
 import com.isabela.TCC.domain.vaga.service.VagaService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -53,4 +56,17 @@ public class VagaController {
         vagaService.deletarVaga(id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/vaga-com-filtro")
+    public ResponseEntity<?> mostrarVagasComFiltros(@RequestParam(required = false) String titulo,
+                                                    @RequestParam(required = false) String cargo,
+                                                    @RequestParam(value = "page", defaultValue = "0") Integer page,
+                                                    @RequestParam(value = "linesPerPage", defaultValue = "40") Integer linesPerPage,
+                                                    @RequestParam(value = "direction", defaultValue = "DESC") String direction,
+                                                    @RequestParam(value = "orderBy", defaultValue = "id") String orderBy){
+        PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
+        Page<VisualizarVagaComFiltroDto> exibirVagasComFiltro = vagaService.exibirVagasComFiltro(titulo, cargo, pageRequest);
+        return ResponseEntity.ok(exibirVagasComFiltro);
+    }
+
 }

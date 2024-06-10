@@ -4,6 +4,7 @@ import com.isabela.TCC.domain.empresa.dto.CadastrarEmpresaDTO;
 import com.isabela.TCC.domain.empresa.model.Empresa;
 import com.isabela.TCC.domain.vaga.model.Vaga;
 import com.isabela.TCC.enums.Situacao;
+import com.isabela.TCC.utils.Endereco;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -22,6 +23,7 @@ public class CadastrarVagaDto {
     @Size(min = 5, max = 20)
     private String titulo;
     private Long empresaId;
+    private Endereco endereco;
     @NotBlank
     @Size(min = 10, max = 400)
     private String descricao;

@@ -37,7 +37,7 @@ public class VagaService {
         vaga.setTitulo(dto.getTitulo());
         vaga.setDecricao(dto.getDescricao());
         vaga.setCargo(dto.getCargo());
-        vaga.setEndereco(dto.);
+        vaga.setEndereco(dto.getEndereco());
         vaga.setSituacao(Situacao.NAO_ATIVO);
         vaga.setEmpresa(empresa);
 
@@ -83,5 +83,9 @@ public class VagaService {
         vagaRepository.delete(vaga);
     }
 
-    public Page<VisualizarVagaComFiltroDto> exibirVagasComFiltro(String titulo, String cargo)
+    @Transactional
+    public Page<VisualizarVagaComFiltroDto> exibirVagasComFiltro(String titulo, String cargo, PageRequest pageRequest){
+        Page<Vaga> vagaPorFiltro = vagaRepository.encontrarPorFiltros(titulo, cargo, pageRequest);
+        return vagaPorFiltro.map(vaga -> VisualizarVagaComFiltroDto.copiarDaEntidadeProDto(vaga));
+    }
 }

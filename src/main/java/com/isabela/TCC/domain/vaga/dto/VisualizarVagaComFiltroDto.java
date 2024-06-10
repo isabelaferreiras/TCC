@@ -21,6 +21,9 @@ public class VisualizarVagaComFiltroDto {
     private String descricao;
     private String cargo;
 
+    public VisualizarVagaComFiltroDto(Vaga vaga) {
+    }
+
     public static VisualizarVagaComFiltroDto copiarDaEntidadeProDto (Vaga entidade){
         VisualizarVagaComFiltroDto dto = new VisualizarVagaComFiltroDto();
         dto.titulo = entidade.getTitulo();
