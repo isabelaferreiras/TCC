@@ -16,6 +16,4 @@ public interface VagaRepository extends JpaRepository<Vaga, Long> {
     @Query("SELECT v FROM Vaga v WHERE (LOWER(v.titulo) IS NULL OR LOWER(v.titulo) LIKE %:titulo%) AND (LOWER(v.cargo) IS NULL OR LOWER(v.cargo) LIKE %:cargo%)")
     Page<Vaga> encontrarPorFiltros(@Param("titulo") String titulo, @Param("cargo") String cargo, PageRequest pageRequest);
 
-
-
 }
