@@ -42,6 +42,8 @@ public class Vaga {
             inverseJoinColumns = @JoinColumn(name = "profissional_id")
     )
     private Set<Profissional> profissionais = new HashSet<>();
+    private Boolean limite;
+    private Integer limiteProfissionais;
     private LocalDateTime createAt;
     private LocalDateTime updateAt;
 

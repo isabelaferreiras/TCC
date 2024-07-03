@@ -30,6 +30,8 @@ public class CadastrarVagaDto {
     @NotBlank
     @Size(min = 4, max = 20)
     private String cargo;
+    private Boolean limite;
+    private Integer limiteProfissionais;
     private Situacao situacao = Situacao.NAO_ATIVO;
 
 }

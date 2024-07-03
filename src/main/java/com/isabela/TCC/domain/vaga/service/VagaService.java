@@ -38,6 +38,15 @@ public class VagaService {
         vaga.setDecricao(dto.getDescricao());
         vaga.setCargo(dto.getCargo());
         vaga.setEndereco(dto.getEndereco());
+        vaga.setLimite(dto.getLimite());
+
+        if (dto.getLimite() == null) {
+            vaga.setLimiteProfissionais(null);
+        } else {
+            vaga.setLimiteProfissionais(dto.getLimiteProfissionais());
+        }
+
+        vaga.setLimiteProfissionais(dto.getLimiteProfissionais());
         vaga.setSituacao(Situacao.NAO_ATIVO);
         vaga.setEmpresa(empresa);
 
@@ -66,6 +75,7 @@ public class VagaService {
             vagaAtualizada.setTitulo(dto.getTitulo());
             vagaAtualizada.setDecricao(dto.getDescricao());
             vagaAtualizada.setCargo(dto.getCargo());
+            vagaAtualizada.setLimiteProfissionais(dto.getLimiteProfissionais());
             vagaAtualizada.setUpdateAt(LocalDateTime.now());
 
             vagaRepository.save(vagaAtualizada);

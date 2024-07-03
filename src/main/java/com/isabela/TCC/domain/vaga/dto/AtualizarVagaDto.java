@@ -22,4 +22,5 @@ public class AtualizarVagaDto {
     @NotBlank
     @Size(min = 4, max = 20)
     private String cargo;
+    private Integer limiteProfissionais;
 }

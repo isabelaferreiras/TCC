@@ -30,6 +30,7 @@ public class VisualizarVagaDto {
     private Endereco endereco;
     private String descricao;
     private String cargo;
+    private Integer limiteProfissionais;
     private Situacao situacao = Situacao.NAO_ATIVO;
     private Set<VisualizarProfissionalVagaDto> profissionais;
 
@@ -40,6 +41,7 @@ public class VisualizarVagaDto {
         dto.descricao = entidade.getDecricao();
         dto.endereco = entidade.getEndereco();
         dto.cargo = entidade.getCargo();
+        dto.limiteProfissionais = entidade.getLimiteProfissionais();
         dto.situacao = entidade.getSituacao();
         dto.empresa = VisualizarEmpresaDaVagaDto.copiarDaEntidadeProDto(entidade.getEmpresa());
         dto.profissionais = entidade.getProfissionais().stream().map(VisualizarProfissionalVagaDto::copiarDaEntidadeProDto).collect(Collectors.toSet());

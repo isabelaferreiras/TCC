@@ -1,9 +1,8 @@
 package com.isabela.TCC.config.validacao;
 
+import com.isabela.TCC.exceptions.LimiteDeInscricoesAtingido;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -45,5 +44,9 @@ public class ControllerExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(erro);
     }
 
+    @ExceptionHandler(LimiteDeInscricoesAtingido.class)
+    public ResponseEntity<String> handleLimiteDeInscricoesAtingidoException(LimiteDeInscricoesAtingido ex) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+    }
 
 }

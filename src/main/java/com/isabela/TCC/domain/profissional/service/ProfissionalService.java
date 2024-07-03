@@ -9,6 +9,7 @@ import com.isabela.TCC.domain.profissional.model.Profissional;
 import com.isabela.TCC.domain.profissional.repository.ProfissionalRepository;
 import com.isabela.TCC.domain.vaga.model.Vaga;
 import com.isabela.TCC.domain.vaga.repository.VagaRepository;
+import com.isabela.TCC.exceptions.LimiteDeInscricoesAtingido;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -86,16 +87,24 @@ public class ProfissionalService {
                 profissionalRepository.delete(profissional);
     }
 
+    @Transactional
     public void cadastrarProfissionalNaVaga(Long profissionalId, Long vagaId){
         Vaga vaga = vagaRepository.findById(vagaId)
                 .orElseThrow(() -> new EntityNotFoundException("Vaga com o ID: " + vagaId + " não encontrada."));
         Profissional profissional = profissionalRepository.findById(profissionalId)
                 .orElseThrow(() -> new EntityNotFoundException("Profissional com o ID: " + profissionalId + " não encontrado."));
+
+        if (vaga.getLimite() != null && vaga.getLimite() && vaga.getLimiteProfissionais() != null) {
+            int inscricoesAtuais = vaga.getProfissionais().size();
+            if (inscricoesAtuais >= vaga.getLimiteProfissionais()) {
+                throw new LimiteDeInscricoesAtingido("O limite de profissionais para esta vaga já foi atingido.");
+            }
+        }
+
         vaga.getProfissionais().add(profissional);
         profissional.getVagas().add(vaga);
         profissionalRepository.save(profissional);
         vagaRepository.save(vaga);
-
     }
 
 }
