@@ -23,7 +23,6 @@ public class Empresa {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String email;
-    private String senha;
     private String nomeEmpresa;
     @Embedded
     private Endereco endereco;

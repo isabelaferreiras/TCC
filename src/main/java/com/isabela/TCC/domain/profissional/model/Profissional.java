@@ -30,10 +30,9 @@ public class Profissional {
     private String nome;
     private LocalDate dataNascimento;
     private String email;
-    private String senha;
+    private String username;
     @Embedded
     private Endereco endereco;
-    private String imagem;
     @OneToOne
     private Curriculo curriculo;
     @ManyToMany(mappedBy = "profissionais", cascade = CascadeType.ALL)
