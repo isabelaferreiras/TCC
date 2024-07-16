@@ -26,8 +26,6 @@ public class CadastrarProfissionalDto {
     @NotEmpty(message = "E-mail não pode estar vazio.")
     @Email
     private String email;
-    @NotBlank
-    private String senha;
     @NotNull(message = "Nome não pode ser nulo.")
     @NotEmpty(message = "Nome não pode estar vazio.")
     private String nome;
@@ -39,7 +37,6 @@ public class CadastrarProfissionalDto {
         CadastrarProfissionalDto dto = new CadastrarProfissionalDto();
         dto.nome = entidade.getNome();
         dto.email = entidade.getEmail();
-        dto.senha = entidade.getSenha();
         dto.endereco = entidade.getEndereco();
         dto.dataNascimento = entidade.getDataNascimento().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 

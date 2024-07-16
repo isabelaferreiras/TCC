@@ -28,7 +28,6 @@ public class EmpresaService {
     public VisualizarEmpresaDto cadastrarEmpresa(CadastrarEmpresaDTO dto) {
         Empresa empresa = new Empresa();
         empresa.setEmail(dto.getEmail());
-        empresa.setSenha(dto.getSenha());
         empresa.setNomeEmpresa(dto.getNomeEmpresa());
         empresa.setEndereco(dto.getEndereco());
         empresa.setDescricao(dto.getDescricao());
@@ -64,7 +63,6 @@ public class EmpresaService {
         Empresa empresaAtualizada = empresaRepository.getReferenceById(id);
         try {
             empresaAtualizada.setNomeEmpresa(dto.getNomeEmpresa());
-            empresaAtualizada.setSenha(dto.getSenha());
             empresaAtualizada.setDescricao(dto.getDescricao());
             empresaAtualizada.setRamo(dto.getRamo());
             empresaAtualizada.setEndereco(dto.getEndereco());

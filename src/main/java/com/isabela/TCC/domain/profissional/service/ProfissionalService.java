@@ -36,7 +36,6 @@ public class ProfissionalService {
     public VisualizarProfissionalDto cadastrarProfissional(CadastrarProfissionalDto dto){
         Profissional profissional = new Profissional();
         profissional.setEmail(dto.getEmail());
-        profissional.setSenha(dto.getSenha());
         profissional.setNome(dto.getNome());
         profissional.setDataNascimento(LocalDate.parse(dto.getDataNascimento(), DateTimeFormatter.ofPattern("dd/MM/yyyy")));
         profissional.setEndereco(dto.getEndereco());
@@ -68,7 +67,6 @@ public class ProfissionalService {
     public VisualizarProfissionalDto atualizarDadosProfissional(Long id, AtualizarProfissionalDto dto){
         Profissional profissionalAtualizado = profissionalRepository.getReferenceById(id);
         try {
-            profissionalAtualizado.setSenha(dto.getSenha());
             profissionalAtualizado.setNome(dto.getNome());
             profissionalAtualizado.setEndereco(dto.getEndereco());
 

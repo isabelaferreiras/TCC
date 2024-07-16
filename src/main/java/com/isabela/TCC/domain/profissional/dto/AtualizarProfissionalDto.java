@@ -19,7 +19,6 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode
 public class AtualizarProfissionalDto {
 
-    private String senha;
     @NotNull(message = "Nome não pode ser nulo.")
     @NotEmpty(message = "Nome não pode estar vazio.")
     private String nome;
@@ -29,7 +28,6 @@ public class AtualizarProfissionalDto {
     public static AtualizarProfissionalDto copiarDaEntidadeProDto (Profissional entidade){
         AtualizarProfissionalDto dto = new AtualizarProfissionalDto();
         dto.nome = entidade.getNome();
-        dto.senha = entidade.getSenha();
         dto.endereco = entidade.getEndereco();
 
         return dto;

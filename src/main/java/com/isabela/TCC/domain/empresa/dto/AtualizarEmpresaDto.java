@@ -20,8 +20,6 @@ import java.util.Objects;
 @NoArgsConstructor
 @EqualsAndHashCode
 public class AtualizarEmpresaDto {
-    @NotBlank
-    private String senha;
     @NotNull(message = "Nome da empresa não pode ser nulo")
     @NotEmpty(message = "Nome da empresa não pode estar vazio")
     @Length(min = 2)
@@ -36,7 +34,6 @@ public class AtualizarEmpresaDto {
     public static AtualizarEmpresaDto copiarDaEntidadeProDto (Empresa entidade){
         AtualizarEmpresaDto dto = new AtualizarEmpresaDto();
         dto.nomeEmpresa = entidade.getNomeEmpresa();
-        dto.senha = entidade.getSenha();
         dto.descricao = entidade.getDescricao();
         dto.ramo = entidade.getRamo();
         dto.endereco = entidade.getEndereco();

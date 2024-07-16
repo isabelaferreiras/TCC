@@ -17,9 +17,6 @@ public class CadastrarEmpresaDTO {
     @NotEmpty(message = "E-mail não pode estar vazio.")
     @Email
     private String email;
-    @NotNull(message = "Senha não pode ser nula.")
-    @NotEmpty(message = "Senha não pode estar vazia.")
-    private String senha;
     @NotNull(message = "Nome não pode ser nulo.")
     @NotEmpty(message = "Nome não pode estar vazio.")
     @Size(min = 3, max = 30)
@@ -36,17 +33,5 @@ public class CadastrarEmpresaDTO {
     private String ramo;
     private Situacao situacao = Situacao.NAO_ATIVO;
 
-    public static CadastrarEmpresaDTO copiarDaEntidadeProDto (Empresa entidade){
-        CadastrarEmpresaDTO dto = new CadastrarEmpresaDTO();
-        dto.nomeEmpresa = entidade.getNomeEmpresa();
-        dto.email = entidade.getEmail();
-        dto.senha = entidade.getSenha();
-        dto.descricao = entidade.getDescricao();
-        dto.ramo = entidade.getRamo();
-        dto.endereco = entidade.getEndereco();
-        dto.situacao = entidade.getSituacao();
-        dto.cnpj = entidade.getCnpj();
-        return dto;
-    }
 
 }

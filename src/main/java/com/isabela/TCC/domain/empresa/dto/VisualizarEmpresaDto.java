@@ -20,7 +20,6 @@ import java.util.stream.Collectors;
 public class VisualizarEmpresaDto {
     private Long id;
     private String email;
-    private String senha;
     private String nomeEmpresa;
     private String descricao;
     private String ramo;
