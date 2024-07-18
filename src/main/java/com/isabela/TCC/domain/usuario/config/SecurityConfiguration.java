@@ -3,6 +3,7 @@ package com.isabela.TCC.domain.usuario.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -14,6 +15,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
+import java.util.Arrays;
+import java.util.List;
 
 @Configuration
 @EnableWebSecurity
@@ -24,7 +29,7 @@ public class SecurityConfiguration {
 
     public static final String [] ENDPOINTS_WITH_AUTHENTICATION_NOT_REQUIRED = {
             "/users/login", //url que usaremos para fazer login
-            "/users/**" //url que usaremos para criar um usuário
+            "/users/create" //url que usaremos para criar um usuário
     };
 
     // Endpoints que requerem autenticação para serem acessados
@@ -42,31 +47,37 @@ public class SecurityConfiguration {
             "/users/test/empresa"
     };
 
-    /*@Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-        return httpSecurity.csrf().disable() // Desativa a proteção contra CSRF
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // Configura a política de criação de sessão como stateless
-                .and().authorizeHttpRequests() // Habilita a autorização para as requisições HTTP
-                .requestMatchers(ENDPOINTS_WITH_AUTHENTICATION_NOT_REQUIRED).permitAll()
-                .requestMatchers(ENDPOINTS_WITH_AUTHENTICATION_REQUIRED).authenticated()
-                .requestMatchers(ENDPOINTS_PROFISSIONAL).hasRole("ADMINISTRATOR") // Repare que não é necessário colocar "ROLE" antes do nome, como fizemos na definição das roles
-                .requestMatchers(ENDPOINTS_EMPRESA).hasRole("CUSTOMER")
-                .anyRequest().denyAll()
-                // Adiciona o filtro de autenticação de usuário que criamos, antes do filtro de segurança padrão do Spring Security
-                .and().addFilterBefore(userAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
-                .build();
-    }*/
+    public static final List<String> WHITELIST = Arrays.asList(
+            "/h2-console/**",
+            "/actuator/*",
+            "/configuration/security",
+            "/configuration/ui",
+            "/swagger-resources",
+            "/swagger-resources/**",
+            "/swagger-resources/configuration/security",
+            "/swagger-resources/configuration/ui",
+            "/swagger-ui.html",
+            "/swagger-ui/**",
+            "/swagger-ui/index.html",
+            "/v3/api-docs/**",
+            "/webjars/**",
+            "/webjars/swagger-ui/**",
+            "/error"
+    );
 
+    @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .cors(Customizer.withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authz -> authz
                         .requestMatchers(ENDPOINTS_WITH_AUTHENTICATION_NOT_REQUIRED).permitAll()
-                        .requestMatchers("/users").permitAll()
                         .requestMatchers(ENDPOINTS_WITH_AUTHENTICATION_REQUIRED).authenticated()
                         .requestMatchers(ENDPOINTS_PROFISSIONAL).hasRole("PROFISSIONAL")
-                        .requestMatchers(ENDPOINTS_EMPRESA).hasRole("EMPRESA") //exemplo
+                        .requestMatchers(ENDPOINTS_EMPRESA).hasRole("EMPRESA")
+                        .requestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**")).permitAll()
+                        .requestMatchers(HttpMethod.OPTIONS,"/**").permitAll()
+                        .requestMatchers(WHITELIST.toArray(String[]::new)).permitAll()
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

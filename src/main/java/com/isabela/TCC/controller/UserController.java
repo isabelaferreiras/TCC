@@ -21,7 +21,7 @@ public class UserController {
         return new ResponseEntity<>(token, HttpStatus.OK);
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<Void> createUser(@RequestBody CreateUserDto createUserDto) {
         userService.createUser(createUserDto);
         return new ResponseEntity<>(HttpStatus.CREATED);
@@ -33,12 +33,12 @@ public class UserController {
     }
 
     @GetMapping("/test/profissional")
-    public ResponseEntity<String> getCustomerAuthenticationTest() {
+    public ResponseEntity<String> getProfissionalAuthenticationTest() {
         return new ResponseEntity<>("Profissional autenticado com sucesso", HttpStatus.OK);
     }
 
     @GetMapping("/test/empresa")
-    public ResponseEntity<String> getAdminAuthenticationTest() {
+    public ResponseEntity<String> getEmpresaAuthenticationTest() {
         return new ResponseEntity<>("Empresa autenticada com sucesso", HttpStatus.OK);
     }
 }
