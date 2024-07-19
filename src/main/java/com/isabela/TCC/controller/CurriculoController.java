@@ -34,12 +34,6 @@ public class CurriculoController {
         return ResponseEntity.ok(curriculo);
     }
 
-    @GetMapping
-    public ResponseEntity<Page<VisualizarCurriculoDto>> listarCurriculos(@RequestParam int pagina,
-                                                                         @RequestParam int qtde){
-        Page<VisualizarCurriculoDto> curriculo = curriculoService.listarCurriculos(pagina, qtde);
-        return ResponseEntity.ok(curriculo);
-    }
 
     @PutMapping("/{id}")
     public ResponseEntity<VisualizarCurriculoDto> atualizarCurriculo(@PathVariable("id") Long id, AtualizarCurriculoDto dto){

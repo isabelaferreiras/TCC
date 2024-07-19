@@ -7,6 +7,7 @@ import com.isabela.TCC.domain.profissional.dto.CadastrarProfissionalDto;
 import com.isabela.TCC.domain.profissional.dto.VisualizarProfissionalDto;
 import com.isabela.TCC.domain.profissional.model.Profissional;
 import com.isabela.TCC.domain.profissional.service.ProfissionalService;
+import com.isabela.TCC.domain.vaga.dto.VisualizarVagaProfissionalDto;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("/profissional")
@@ -66,6 +68,12 @@ public class ProfissionalController {
     public ResponseEntity<Void> cadastrarProfissionalNaVaga(Long profissionalId, Long vagaId){
         profissionalService.cadastrarProfissionalNaVaga(profissionalId, vagaId);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/{id}/vagasCandidatadas")
+    public ResponseEntity<List<VisualizarVagaProfissionalDto>> verVagasCandidatadas(@PathVariable("id") Long profissionalId){
+        List<VisualizarVagaProfissionalDto> vagasCadastradas = profissionalService.visualizarVagasCadastradas(profissionalId);
+        return ResponseEntity.ok(vagasCadastradas);
     }
 
 }

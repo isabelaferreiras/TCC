@@ -54,12 +54,6 @@ public class CurriculoService {
         return VisualizarCurriculoDto.copiarDaEntidadeProDto(curriculo);
     }
 
-    @Transactional
-    public Page<VisualizarCurriculoDto> listarCurriculos(int pagina, int qtde){
-        Pageable paginacao = PageRequest.of(pagina, qtde);
-        Page<Curriculo> curriculo = curriculoRepository.findAll(paginacao);
-        return curriculo.map(VisualizarCurriculoDto::copiarDaEntidadeProDto);
-    }
 
     @Transactional
     public VisualizarCurriculoDto atualizarCurriculo(Long id, AtualizarCurriculoDto dto){

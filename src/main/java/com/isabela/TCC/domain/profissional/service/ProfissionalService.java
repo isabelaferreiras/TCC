@@ -7,6 +7,7 @@ import com.isabela.TCC.domain.profissional.dto.CadastrarProfissionalDto;
 import com.isabela.TCC.domain.profissional.dto.VisualizarProfissionalDto;
 import com.isabela.TCC.domain.profissional.model.Profissional;
 import com.isabela.TCC.domain.profissional.repository.ProfissionalRepository;
+import com.isabela.TCC.domain.vaga.dto.VisualizarVagaProfissionalDto;
 import com.isabela.TCC.domain.vaga.model.Vaga;
 import com.isabela.TCC.domain.vaga.repository.VagaRepository;
 import com.isabela.TCC.exceptions.LimiteDeInscricoesAtingido;
@@ -22,7 +23,9 @@ import java.net.Authenticator;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ProfissionalService {
@@ -103,6 +106,16 @@ public class ProfissionalService {
         profissional.getVagas().add(vaga);
         profissionalRepository.save(profissional);
         vagaRepository.save(vaga);
+    }
+
+    @Transactional
+    public List<VisualizarVagaProfissionalDto> visualizarVagasCadastradas(Long profissionalId) {
+        Profissional profissional = profissionalRepository.findById(profissionalId)
+                .orElseThrow(() -> new EntityNotFoundException("Profissional não encontrado"));
+
+        return profissional.getVagas().stream()
+                .map(VisualizarVagaProfissionalDto::copiarDaEntidadeProDto)
+                .collect(Collectors.toList());
     }
 
 }

@@ -2,6 +2,9 @@ package com.isabela.TCC.domain.empresa.service;
 
 import com.isabela.TCC.domain.empresa.dto.AtualizarEmpresaDto;
 import com.isabela.TCC.domain.empresa.dto.VisualizarEmpresaDto;
+import com.isabela.TCC.domain.profissional.dto.VisualizarProfissionalVagaDto;
+import com.isabela.TCC.domain.vaga.model.Vaga;
+import com.isabela.TCC.domain.vaga.repository.VagaRepository;
 import com.isabela.TCC.enums.Situacao;
 import com.isabela.TCC.domain.empresa.dto.CadastrarEmpresaDTO;
 import com.isabela.TCC.domain.empresa.model.Empresa;
@@ -18,11 +21,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class EmpresaService {
     @Autowired
     private EmpresaRepository empresaRepository;
+    @Autowired
+    private VagaRepository vagaRepository;
 
     @Transactional
     public VisualizarEmpresaDto cadastrarEmpresa(CadastrarEmpresaDTO dto) {
@@ -84,5 +90,14 @@ public class EmpresaService {
 
     }
 
+    @Transactional
+    public List<VisualizarProfissionalVagaDto> visualizarProfissionaisCadastrados(Long vagaId) {
+        Vaga vaga = vagaRepository.findById(vagaId)
+                .orElseThrow(() -> new EntityNotFoundException("Vaga não encontrada"));
+
+        return vaga.getProfissionais().stream()
+                .map(VisualizarProfissionalVagaDto::copiarDaEntidadeProDto)
+                .collect(Collectors.toList());
+    }
 
 }

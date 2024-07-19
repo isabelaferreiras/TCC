@@ -3,6 +3,7 @@ package com.isabela.TCC.domain.curriculo.dto;
 import com.isabela.TCC.domain.curriculo.model.Curriculo;
 import com.isabela.TCC.domain.empresa.dto.VisualizarEmpresaDto;
 import com.isabela.TCC.domain.profissional.dto.VisualizarProfissionalDto;
+import com.isabela.TCC.domain.profissional.model.Profissional;
 import com.isabela.TCC.domain.vaga.dto.VisualizarVagaDto;
 import com.isabela.TCC.domain.vaga.model.Vaga;
 import com.isabela.TCC.enums.Escolaridade;
@@ -32,15 +33,15 @@ public class VisualizarCurriculoDto {
     private Set<HabilidadeTecnica> habilidadesTecnicas = new HashSet<>();
     private Set<Idioma> idiomas = new HashSet<>();
 
-    public static VisualizarCurriculoDto copiarDaEntidadeProDto (Curriculo entidade){
+    public static VisualizarCurriculoDto copiarDaEntidadeProDto (Curriculo entidadeCurriculo){
         VisualizarCurriculoDto dto = new VisualizarCurriculoDto();
-        dto.id = entidade.getId();
-        dto.escolaridade = entidade.getEscolaridade();
-        dto.experienciaProfissionais = entidade.getExperienciasProfissionais();
-        dto.habilidadesPessoais = entidade.getHabilidadesPessoais();
-        dto.habilidadesTecnicas = entidade.getHabilidadesTecnicas();
-        dto.idiomas = entidade.getIdiomas();
-        dto.profissional = VisualizarProfissionalDto.copiarDaEntidadeProDto(entidade.getProfissional());
+        dto.id = entidadeCurriculo.getId();
+        dto.escolaridade = entidadeCurriculo.getEscolaridade();
+        dto.experienciaProfissionais = entidadeCurriculo.getExperienciasProfissionais();
+        dto.habilidadesPessoais = entidadeCurriculo.getHabilidadesPessoais();
+        dto.habilidadesTecnicas = entidadeCurriculo.getHabilidadesTecnicas();
+        dto.idiomas = entidadeCurriculo.getIdiomas();
+        dto.profissional = VisualizarProfissionalDto.copiarDaEntidadeProDto(entidadeCurriculo.getProfissional());
 
         return dto;
     }

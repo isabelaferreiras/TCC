@@ -5,6 +5,7 @@ import com.isabela.TCC.domain.empresa.dto.CadastrarEmpresaDTO;
 import com.isabela.TCC.domain.empresa.dto.VisualizarEmpresaDto;
 import com.isabela.TCC.domain.empresa.model.Empresa;
 import com.isabela.TCC.domain.empresa.service.EmpresaService;
+import com.isabela.TCC.domain.profissional.dto.VisualizarProfissionalVagaDto;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -53,5 +54,11 @@ public class EmpresaController {
     public ResponseEntity<Void> deletarEmpresa(@PathVariable("id") Long id){
         empresaService.deletarEmpresa(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/vagasPostadas/{vagaId}/profissionais")
+    public ResponseEntity<List<VisualizarProfissionalVagaDto>> visualizarProfissionaisCadastrados(@PathVariable("vagaId") Long vagaId) {
+        List<VisualizarProfissionalVagaDto> profissionais = empresaService.visualizarProfissionaisCadastrados(vagaId);
+        return ResponseEntity.ok(profissionais);
     }
 }
