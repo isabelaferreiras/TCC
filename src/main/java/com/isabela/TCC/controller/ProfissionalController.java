@@ -7,6 +7,8 @@ import com.isabela.TCC.domain.profissional.dto.CadastrarProfissionalDto;
 import com.isabela.TCC.domain.profissional.dto.VisualizarProfissionalDto;
 import com.isabela.TCC.domain.profissional.model.Profissional;
 import com.isabela.TCC.domain.profissional.service.ProfissionalService;
+import com.isabela.TCC.domain.usuario.dto.AuthenticationDto;
+import com.isabela.TCC.domain.usuario.dto.RegisterDto;
 import com.isabela.TCC.domain.vaga.dto.VisualizarVagaProfissionalDto;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

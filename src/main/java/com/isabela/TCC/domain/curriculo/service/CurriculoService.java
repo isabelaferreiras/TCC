@@ -29,6 +29,12 @@ public class CurriculoService {
     private CurriculoRepository curriculoRepository;
     @Autowired
     private ProfissionalRepository profissionalRepository;
+
+    @Transactional
+    public Curriculo getCurriculoByProfissionalId(Long profissionalId) {
+        return curriculoRepository.findByProfissionalId(profissionalId);
+    }
+
     @Transactional
     public VisualizarCurriculoDto cadastrarCurriculo(CadastrarCurriculoDto dto){
         Curriculo curriculo = new Curriculo();

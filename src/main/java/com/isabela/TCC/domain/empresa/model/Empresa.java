@@ -1,5 +1,6 @@
 package com.isabela.TCC.domain.empresa.model;
 
+import com.isabela.TCC.domain.usuario.model.User;
 import com.isabela.TCC.utils.Endereco;
 import com.isabela.TCC.enums.Situacao;
 import com.isabela.TCC.domain.vaga.model.Vaga;
@@ -33,6 +34,8 @@ public class Empresa {
     @OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL, orphanRemoval = true)
     @Setter(AccessLevel.NONE)
     private Set<Vaga> vagas = new HashSet<>();
+    @OneToOne(mappedBy = "empresa", cascade = CascadeType.ALL)
+    private User user;
     private LocalDateTime createAt;
     private LocalDateTime updateAt;
 

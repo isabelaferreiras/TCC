@@ -1,5 +1,7 @@
 package com.isabela.TCC.domain.usuario.model;
 
+import com.isabela.TCC.domain.empresa.model.Empresa;
+import com.isabela.TCC.domain.profissional.model.Profissional;
 import com.isabela.TCC.domain.usuario.role.UserRole;
 import jakarta.persistence.*;
 import lombok.*;
@@ -24,6 +26,18 @@ public class User implements UserDetails {
     private String login;
     private String password;
     private UserRole role;
+
+    @OneToOne
+    @JoinTable(name = "tb_usuario_empresa",
+            joinColumns = @JoinColumn(name = "usuario_id"),
+            inverseJoinColumns = @JoinColumn(name = "empresa_id"))
+    private Empresa empresa;
+
+    @OneToOne
+    @JoinTable(name = "tb_usuario_profissional",
+            joinColumns = @JoinColumn(name = "usuario_id"),
+            inverseJoinColumns = @JoinColumn(name = "profissional_id"))
+    private Profissional profissional;
 
     public User(String login, String password, UserRole role){
         this.login = login;

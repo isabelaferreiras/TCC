@@ -8,6 +8,8 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -31,6 +33,21 @@ public class CurriculoController {
     @GetMapping("/{id}")
     public ResponseEntity<VisualizarCurriculoDto> findCurriculoById(@PathVariable("id") Long id){
         VisualizarCurriculoDto curriculo = curriculoService.findCurriculoById(id);
+        return ResponseEntity.ok(curriculo);
+    }
+
+    @GetMapping
+    public ResponseEntity<VisualizarCurriculoDto> getMeuCurriculo() {
+        // Supondo que o ID do profissional é o ID do usuário autenticado
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Long profissionalId = Long.valueOf(authentication.getName()); // ou outro método para obter o ID
+
+        VisualizarCurriculoDto curriculo = VisualizarCurriculoDto.copiarDaEntidadeProDto(curriculoService.getCurriculoByProfissionalId(profissionalId));
+
+        if (curriculo == null) {
+            return ResponseEntity.notFound().build();
+        }
+
         return ResponseEntity.ok(curriculo);
     }
 

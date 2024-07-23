@@ -7,6 +7,10 @@ import com.isabela.TCC.domain.profissional.dto.CadastrarProfissionalDto;
 import com.isabela.TCC.domain.profissional.dto.VisualizarProfissionalDto;
 import com.isabela.TCC.domain.profissional.model.Profissional;
 import com.isabela.TCC.domain.profissional.repository.ProfissionalRepository;
+import com.isabela.TCC.domain.usuario.dto.AuthenticationDto;
+import com.isabela.TCC.domain.usuario.model.User;
+import com.isabela.TCC.domain.usuario.repository.UserRepository;
+import com.isabela.TCC.domain.usuario.role.UserRole;
 import com.isabela.TCC.domain.vaga.dto.VisualizarVagaProfissionalDto;
 import com.isabela.TCC.domain.vaga.model.Vaga;
 import com.isabela.TCC.domain.vaga.repository.VagaRepository;
@@ -17,6 +21,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.net.Authenticator;
@@ -34,16 +40,26 @@ public class ProfissionalService {
     private ProfissionalRepository profissionalRepository;
     @Autowired
     private VagaRepository vagaRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     @Transactional
     public VisualizarProfissionalDto cadastrarProfissional(CadastrarProfissionalDto dto){
         Profissional profissional = new Profissional();
+
+        if (this.userRepository.findByLogin(dto.getEmail()) != null) throw new IllegalArgumentException("Usuário já existente");
+
+        String encryptedPassword = new BCryptPasswordEncoder().encode(dto.getPassword());
+        User newUser = new User(dto.getEmail(), encryptedPassword, UserRole.PROFISSIONAL);
+        this.userRepository.save(newUser);
+
         profissional.setEmail(dto.getEmail());
         profissional.setNome(dto.getNome());
         profissional.setDataNascimento(LocalDate.parse(dto.getDataNascimento(), DateTimeFormatter.ofPattern("dd/MM/yyyy")));
         profissional.setEndereco(dto.getEndereco());
         profissional.setCreateAt(LocalDateTime.now());
         profissional.setUpdateAt(LocalDateTime.now());
+        profissional.setUser(newUser);
 
         profissionalRepository.save(profissional);
 

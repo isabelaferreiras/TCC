@@ -4,6 +4,7 @@ import com.isabela.TCC.domain.curriculo.model.Curriculo;
 import com.isabela.TCC.domain.empresa.dto.CadastrarEmpresaDTO;
 import com.isabela.TCC.domain.empresa.model.Empresa;
 import com.isabela.TCC.domain.profissional.model.Profissional;
+import com.isabela.TCC.domain.usuario.model.User;
 import com.isabela.TCC.utils.Endereco;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -32,12 +33,14 @@ public class CadastrarProfissionalDto {
     @NotBlank
     private String dataNascimento;
     private Endereco endereco;
+    private String password;
 
     public static CadastrarProfissionalDto copiarDaEntidadeProDto(Profissional entidade){
         CadastrarProfissionalDto dto = new CadastrarProfissionalDto();
         dto.nome = entidade.getNome();
         dto.email = entidade.getEmail();
         dto.endereco = entidade.getEndereco();
+        dto.password = entidade.getPassword();
         dto.dataNascimento = entidade.getDataNascimento().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 
         return dto;

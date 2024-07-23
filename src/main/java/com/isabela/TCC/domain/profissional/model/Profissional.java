@@ -1,5 +1,6 @@
 package com.isabela.TCC.domain.profissional.model;
 
+import com.isabela.TCC.domain.usuario.model.User;
 import com.isabela.TCC.utils.Endereco;
 import com.isabela.TCC.domain.curriculo.model.Curriculo;
 import com.isabela.TCC.domain.vaga.model.Vaga;
@@ -30,13 +31,15 @@ public class Profissional {
     private String nome;
     private LocalDate dataNascimento;
     private String email;
-    private String username;
+    private String password;
     @Embedded
     private Endereco endereco;
     @OneToOne
     private Curriculo curriculo;
     @ManyToMany(mappedBy = "profissionais", cascade = CascadeType.ALL)
     private Set<Vaga> vagas = new HashSet<>();
+    @OneToOne(mappedBy = "profissional", cascade = CascadeType.ALL)
+    private User user;
     private LocalDateTime createAt;
     private LocalDateTime updateAt;
 
