@@ -31,6 +31,7 @@ public class CadastrarEmpresaDTO {
     @NotEmpty(message = "Ramo não pode ser nulo.")
     @Size(min = 4, max = 20)
     private String ramo;
+    private String password;
     private Situacao situacao = Situacao.NAO_ATIVO;
 
 

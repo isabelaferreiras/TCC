@@ -2,7 +2,13 @@ package com.isabela.TCC.domain.empresa.service;
 
 import com.isabela.TCC.domain.empresa.dto.AtualizarEmpresaDto;
 import com.isabela.TCC.domain.empresa.dto.VisualizarEmpresaDto;
+import com.isabela.TCC.domain.profissional.dto.CadastrarProfissionalDto;
+import com.isabela.TCC.domain.profissional.dto.VisualizarProfissionalDto;
 import com.isabela.TCC.domain.profissional.dto.VisualizarProfissionalVagaDto;
+import com.isabela.TCC.domain.profissional.model.Profissional;
+import com.isabela.TCC.domain.usuario.model.User;
+import com.isabela.TCC.domain.usuario.repository.UserRepository;
+import com.isabela.TCC.domain.usuario.role.UserRole;
 import com.isabela.TCC.domain.vaga.model.Vaga;
 import com.isabela.TCC.domain.vaga.repository.VagaRepository;
 import com.isabela.TCC.enums.Situacao;
@@ -15,10 +21,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -29,10 +38,19 @@ public class EmpresaService {
     private EmpresaRepository empresaRepository;
     @Autowired
     private VagaRepository vagaRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     @Transactional
-    public VisualizarEmpresaDto cadastrarEmpresa(CadastrarEmpresaDTO dto) {
+    public VisualizarEmpresaDto cadastrarEmpresa(CadastrarEmpresaDTO dto){
         Empresa empresa = new Empresa();
+
+        if (this.userRepository.findByLogin(dto.getEmail()) != null) throw new IllegalArgumentException("Usuário já existente");
+
+        String encryptedPassword = new BCryptPasswordEncoder().encode(dto.getPassword());
+        User newUser = new User(dto.getEmail(), encryptedPassword, UserRole.PROFISSIONAL);
+        this.userRepository.save(newUser);
+
         empresa.setEmail(dto.getEmail());
         empresa.setNomeEmpresa(dto.getNomeEmpresa());
         empresa.setEndereco(dto.getEndereco());
@@ -42,11 +60,13 @@ public class EmpresaService {
         empresa.setSituacao(Situacao.NAO_ATIVO);
         empresa.setCreateAt(LocalDateTime.now());
         empresa.setUpdateAt(LocalDateTime.now());
+        empresa.setUser(newUser);
 
         empresaRepository.save(empresa);
 
         return VisualizarEmpresaDto.copiarDaEntidadeProDto(empresa);
     }
+
 
     @Transactional
     public VisualizarEmpresaDto FindEmpresaById(Long id){

@@ -39,8 +39,9 @@ public class SecurityConfiguration {
                         .requestMatchers(HttpMethod.GET, "/vagasPostadas/**").hasRole("EMPRESA")
                         .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
                         .requestMatchers(HttpMethod.POST, "/auth/register").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/profissional").permitAll()
-                        .anyRequest().permitAll()
+                        .requestMatchers(HttpMethod.POST, "/profissional/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/empresa/**").permitAll()
+                        .anyRequest().authenticated()
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
