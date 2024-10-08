@@ -57,7 +57,7 @@ public class EmpresaService {
         empresa.setDescricao(dto.getDescricao());
         empresa.setRamo(dto.getRamo());
         empresa.setCnpj(dto.getCnpj());
-        empresa.setSituacao(Situacao.NAO_ATIVO);
+        empresa.setSituacao(Situacao.ATIVO);
         empresa.setCreateAt(LocalDateTime.now());
         empresa.setUpdateAt(LocalDateTime.now());
         empresa.setUser(newUser);

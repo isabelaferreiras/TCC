@@ -32,7 +32,6 @@ public class CadastrarEmpresaDTO {
     @Size(min = 4, max = 20)
     private String ramo;
     private String password;
-    private Situacao situacao = Situacao.NAO_ATIVO;
 
 
 }
