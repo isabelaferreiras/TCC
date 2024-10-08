@@ -47,7 +47,7 @@ public class VagaService {
         }
 
         vaga.setLimiteProfissionais(dto.getLimiteProfissionais());
-        vaga.setSituacao(Situacao.NAO_ATIVO);
+        vaga.setSituacao(Situacao.ATIVO);
         vaga.setEmpresa(empresa);
 
         vagaRepository.save(vaga);

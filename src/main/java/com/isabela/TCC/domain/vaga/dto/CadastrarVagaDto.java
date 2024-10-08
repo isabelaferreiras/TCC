@@ -32,6 +32,5 @@ public class CadastrarVagaDto {
     private String cargo;
     private Boolean limite;
     private Integer limiteProfissionais;
-    private Situacao situacao = Situacao.NAO_ATIVO;
 
 }
