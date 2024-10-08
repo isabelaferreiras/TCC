@@ -1,4 +1,6 @@
 package com.isabela.TCC.domain.usuario;
 
-public record LoginResponseDto(String token, Long id) {
+import com.isabela.TCC.domain.usuario.role.UserRole;
+
+public record LoginResponseDto(String token, Long id, UserRole role) {
 }

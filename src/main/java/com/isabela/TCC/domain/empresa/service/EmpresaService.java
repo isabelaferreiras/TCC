@@ -48,7 +48,7 @@ public class EmpresaService {
         if (this.userRepository.findByLogin(dto.getEmail()) != null) throw new IllegalArgumentException("Usuário já existente");
 
         String encryptedPassword = new BCryptPasswordEncoder().encode(dto.getPassword());
-        User newUser = new User(dto.getEmail(), encryptedPassword, UserRole.PROFISSIONAL);
+        User newUser = new User(dto.getEmail(), encryptedPassword, UserRole.EMPRESA);
         this.userRepository.save(newUser);
 
         empresa.setEmail(dto.getEmail());

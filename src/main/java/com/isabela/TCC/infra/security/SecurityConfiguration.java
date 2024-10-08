@@ -52,7 +52,7 @@ public class SecurityConfiguration {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(WHITELIST.toArray(String[]::new)).permitAll()
-                        .requestMatchers(HttpMethod.POST, "/vagas").hasRole("EMPRESA")
+                        .requestMatchers(HttpMethod.POST, "/vagas/**").hasRole("EMPRESA")
                         .requestMatchers(HttpMethod.GET, "/vagas/**").permitAll()
                         .requestMatchers(HttpMethod.PUT, "/vagas/**").hasRole("EMPRESA")
                         .requestMatchers(HttpMethod.DELETE, "/vagas/**").hasRole("EMPRESA")
