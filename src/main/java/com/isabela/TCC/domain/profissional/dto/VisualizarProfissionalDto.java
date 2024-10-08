@@ -28,6 +28,7 @@ public class VisualizarProfissionalDto {
     private LocalDate dataNascimento;
     private String email;
     private Endereco endereco;
+    private String telefone;
     private Set<VisualizarVagaProfissionalDto> vagas;
 
     public static VisualizarProfissionalDto copiarDaEntidadeProDto (Profissional entidade){
@@ -36,6 +37,7 @@ public class VisualizarProfissionalDto {
         dto.nome = entidade.getNome();
         dto.dataNascimento = entidade.getDataNascimento();
         dto.email = entidade.getEmail();
+        dto.telefone = entidade.getTelefone();
         dto.endereco = entidade.getEndereco();
         dto.vagas = entidade.getVagas().stream().map(VisualizarVagaProfissionalDto::copiarDaEntidadeProDto).collect(Collectors.toSet());
 

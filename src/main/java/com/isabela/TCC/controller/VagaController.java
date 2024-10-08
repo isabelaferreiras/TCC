@@ -18,6 +18,7 @@ import java.net.URI;
 
 @RestController
 @RequestMapping("/vagas")
+@CrossOrigin("*")
 public class VagaController {
 
     @Autowired

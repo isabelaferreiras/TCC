@@ -14,6 +14,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import java.util.Arrays;
+import java.util.List;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration {
@@ -21,14 +24,34 @@ public class SecurityConfiguration {
     @Autowired
     SecurityFilter securityFilter;
 
+    public static final List<String> WHITELIST = Arrays.asList(
+            "/h2-console/**",
+            "/actuator/*",
+            "/configuration/security",
+            "/configuration/ui",
+            "/swagger-resources",
+            "/swagger-resources/**",
+            "/swagger-resources/configuration/security",
+            "/swagger-resources/configuration/ui",
+            "/swagger-ui.html",
+            "/swagger-ui/**",
+            "/swagger-ui/index.html",
+            "/v3/api-docs/**",
+            "/webjars/**",
+            "/webjars/swagger-ui/**",
+            "/error"
+    );
+
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception{
         return httpSecurity
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
+                        .requestMatchers(WHITELIST.toArray(String[]::new)).permitAll()
                         .requestMatchers(HttpMethod.POST, "/vagas").hasRole("EMPRESA")
-                        .requestMatchers(HttpMethod.GET, "/vagas/**").hasRole("EMPRESA")
+                        .requestMatchers(HttpMethod.GET, "/vagas/**").permitAll()
                         .requestMatchers(HttpMethod.PUT, "/vagas/**").hasRole("EMPRESA")
                         .requestMatchers(HttpMethod.DELETE, "/vagas/**").hasRole("EMPRESA")
                         .requestMatchers(HttpMethod.POST, "/curriculo").hasRole("PROFISSIONAL")

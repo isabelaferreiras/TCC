@@ -18,6 +18,7 @@ public class VisualizarProfissionalVagaDto {
     private String nome;
     private LocalDate dataNascimento;
     private String email;
+    private String telefone;
     private Endereco endereco;
 
     public static VisualizarProfissionalVagaDto copiarDaEntidadeProDto (Profissional entidade){
@@ -26,6 +27,7 @@ public class VisualizarProfissionalVagaDto {
         dto.nome = entidade.getNome();
         dto.dataNascimento = entidade.getDataNascimento();
         dto.email = entidade.getEmail();
+        dto.telefone = entidade.getTelefone();
         dto.endereco = entidade.getEndereco();
 
         return dto;

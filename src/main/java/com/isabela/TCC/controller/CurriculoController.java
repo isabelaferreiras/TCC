@@ -17,6 +17,7 @@ import java.net.URI;
 
 @RestController
 @RequestMapping("/curriculo")
+@CrossOrigin("*")
 public class CurriculoController {
 
     @Autowired
