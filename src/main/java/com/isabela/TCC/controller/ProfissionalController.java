@@ -31,7 +31,7 @@ public class ProfissionalController {
 
     private CurriculoRepository curriculoRepository;
 
-    @PostMapping
+    @PostMapping("/cadastrarProfissional")
     public ResponseEntity<VisualizarProfissionalDto> cadastrarProfissional(@RequestBody @Valid CadastrarProfissionalDto dto){
         VisualizarProfissionalDto profissional = profissionalService.cadastrarProfissional(dto);
 

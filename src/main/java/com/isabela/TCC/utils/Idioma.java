@@ -14,8 +14,8 @@ import java.util.Objects;
 @Embeddable
 public class Idioma {
     private String idioma;
-    private Nivel nivelLeitura;
-    private Nivel nivelConvesacao;
+    private String nivelDeLeitura;
+    private String nivelDeConversacao;
 
 
     @Override

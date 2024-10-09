@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class VagaService {
@@ -62,10 +63,9 @@ public class VagaService {
     }
 
     @Transactional
-    public Page<VisualizarVagaDto> listarVagas(int pagina, int qtde){
-        Pageable paginacao = PageRequest.of(pagina, qtde);
-        Page<Vaga> vagas = vagaRepository.findAll(paginacao);
-        return vagas.map(VisualizarVagaDto::copiarDaEntidadeProDto);
+    public List<VisualizarVagaDto> listarVagas(){
+        List<Vaga> vagas = vagaRepository.findAll();
+        return vagas.stream().map(VisualizarVagaDto::copiarDaEntidadeProDto).collect(Collectors.toList());
     }
 
     @Transactional

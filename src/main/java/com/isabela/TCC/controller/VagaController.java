@@ -11,10 +11,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("/vagas")
@@ -25,6 +27,7 @@ public class VagaController {
     private VagaService vagaService;
 
     @PostMapping
+    @PreAuthorize("hasAnyRole('EMPRESA)")
     public ResponseEntity<VisualizarVagaDto> cadastrarVaga(@RequestBody @Valid CadastrarVagaDto dto){
         VisualizarVagaDto vaga = vagaService.cadastrarVaga(dto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}")
@@ -39,13 +42,14 @@ public class VagaController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<VisualizarVagaDto>> listarVagas(@RequestParam int pagina,
-                                                               @RequestParam int qtde){
-        Page<VisualizarVagaDto> vagas = vagaService.listarVagas(pagina, qtde);
+    public ResponseEntity<List<VisualizarVagaDto>> listarVagas(//@RequestParam int pagina,
+                                                               /*@RequestParam int qtde*/){
+        List<VisualizarVagaDto> vagas = vagaService.listarVagas(/*pagina, qtde*/);
         return ResponseEntity.ok(vagas);
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAnyRole('EMPRESA)")
     public ResponseEntity<VisualizarVagaDto> atualizarVaga(@PathVariable("id") Long id,
                                                            @RequestBody @Valid AtualizarVagaDto dto){
         VisualizarVagaDto vaga = vagaService.atualizarVaga(id, dto);
@@ -53,6 +57,7 @@ public class VagaController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAnyRole('EMPRESA)")
     public ResponseEntity<Void> deletarVaga(@PathVariable("id") Long id){
         vagaService.deletarVaga(id);
         return ResponseEntity.noContent().build();

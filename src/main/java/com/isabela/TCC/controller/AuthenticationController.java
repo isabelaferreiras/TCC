@@ -14,6 +14,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/auth")
 @CrossOrigin("*")
@@ -34,10 +36,18 @@ public class AuthenticationController {
         var auth = this.authenticationManager.authenticate(usernamePassword);
 
         var token = tokenService.generateToken((User) auth.getPrincipal());
-        var id = ((User) auth.getPrincipal()).getId();
+
+        var user = (User) auth.getPrincipal();
+
+        // Verifica se a empresa existe antes de tentar pegar o ID
+        Long empresaId = user.getEmpresa() != null ? user.getEmpresa().getId() : null;
+
+        // Verifica se o profissional existe antes de tentar pegar o ID
+        Long userId = user.getProfissional() != null ? user.getProfissional().getId() : null;
+
         var role = ((User) auth.getPrincipal()).getRole();
 
-        return ResponseEntity.ok(new LoginResponseDto(token, id, role));
+        return ResponseEntity.ok(new LoginResponseDto(token, empresaId, userId, role));
     }
 
     /*@PostMapping("/register")

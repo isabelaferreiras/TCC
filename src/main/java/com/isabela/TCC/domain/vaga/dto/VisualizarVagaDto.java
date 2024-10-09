@@ -31,7 +31,7 @@ public class VisualizarVagaDto {
     private String descricao;
     private String cargo;
     private Integer limiteProfissionais;
-    private Situacao situacao = Situacao.NAO_ATIVO;
+    private Situacao situacao;
     private Set<VisualizarProfissionalVagaDto> profissionais;
 
     public static VisualizarVagaDto copiarDaEntidadeProDto (Vaga entidade){

@@ -23,7 +23,7 @@ public class EmpresaController {
     @Autowired
     private EmpresaService empresaService;
 
-    @PostMapping
+    @PostMapping("/cadastrarEmpresa")
     public ResponseEntity<VisualizarEmpresaDto> cadastrarEmpresa(@RequestBody @Valid CadastrarEmpresaDTO dto){
         VisualizarEmpresaDto empresa = empresaService.cadastrarEmpresa(dto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}")
